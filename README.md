@@ -7,4 +7,4 @@ A wrapper for the HubSpot API based on Node - http://developers.hubspot.com/docs
 
 ## Tests
 
-  `npm run test`
+  `npm test`
