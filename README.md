@@ -3,7 +3,7 @@ A wrapper for the HubSpot API based on Node - http://developers.hubspot.com/docs
 
 ## Installation
 
-  `npm install node-hubspot-api`
+  `npm install node-hubspot-api --save`
 
 ## Tests
 
