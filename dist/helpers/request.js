@@ -43,12 +43,21 @@ var Request = function () {
 
       return this.apiInstance.get(this.normalizeEndPointURL(endPoint), { params: params });
     }
+
+    // TODO
+
   }, {
     key: 'post',
     value: function post() {}
+
+    // TODO
+
   }, {
     key: 'put',
     value: function put() {}
+
+    // TODO
+
   }, {
     key: 'delete',
     value: function _delete() {}
@@ -56,20 +65,5 @@ var Request = function () {
 
   return Request;
 }();
-
-// const Request = (apiKey) => {
-//
-//   let apiInstance = axios.create({
-//     baseURL: `${hbEndPoint}`,
-//     timeout: 10000,
-//   })
-//
-//   return {
-//     get: (endPoint, params = {}) => apiInstance.get(`${endPoint}?hapikey=${apiKey}`, { params: params }),
-//     post: () => {},
-//     put: () => {},
-//     delete: () => {},
-//   }
-// }
 
 exports.default = Request;
