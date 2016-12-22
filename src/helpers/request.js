@@ -1,5 +1,3 @@
-'use strict'
-
 import axios from 'axios'
 
 const API_ENDPOINT = 'https://api.hubapi.com'
@@ -22,35 +20,23 @@ class Request {
   }
 
   get(endPoint, params = {}) {
-    return this.apiInstance.get(this.normalizeEndPointURL(endPoint), { params: params })
+    return this.apiInstance.get(this.normalizeEndPointURL(endPoint), { params })
   }
 
+  // TODO
   post() {
 
   }
 
+  // TODO
   put() {
 
   }
 
+  // TODO
   delete() {
 
   }
 }
-
-// const Request = (apiKey) => {
-//
-//   let apiInstance = axios.create({
-//     baseURL: `${hbEndPoint}`,
-//     timeout: 10000,
-//   })
-//
-//   return {
-//     get: (endPoint, params = {}) => apiInstance.get(`${endPoint}?hapikey=${apiKey}`, { params: params }),
-//     post: () => {},
-//     put: () => {},
-//     delete: () => {},
-//   }
-// }
 
 export default Request
