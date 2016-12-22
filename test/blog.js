@@ -58,7 +58,8 @@ describe('Blog', () => {
         .then(response => {
           expect(response.status).to.equal(200)
           expect(response.data).to.be.a('object')
-          expect(response.data.html_title).to.equal('GPI First API blog post!')
+          expect(response.data.html_title).to.equal('Test Blog Post')
+          done()
         })
         .catch(error => done(error))
     })
