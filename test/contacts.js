@@ -14,9 +14,9 @@ describe('Contacts', () => {
 
       api.contacts.getAll()
         .then(response => {
-          expect(response.status).to.equal(200)
-          expect(response.data).to.be.a('object')
-          expect(response.data.contacts).to.be.a('array')
+          expect(response.statusCode).to.equal(200)
+          expect(response.body).to.be.a('object')
+          expect(response.body.contacts).to.be.a('array')
           done()
         })
         .catch(error => done(error))
