@@ -5,14 +5,14 @@ module.exports = (error) => {
       // that falls out of the range of 2xx
       console.log(`
         ======> Error
-        Message: ${error.response.data.message}
-        Status: ${error.response.status}
+        Message: ${error.response.statusMessage}
+        Status: ${error.response.statusCode}
         headers: ${JSON.stringify(error.response.headers)}
       `)
 
-      throw new Error(error.response.data.message)
+      throw new Error(error.response.statusMessage)
     } else {
       // Something happened in setting up the request that triggered an Error
-      throw new Error(error.message)
+      throw new Error(error)
     }
 }
