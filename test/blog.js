@@ -14,9 +14,9 @@ describe('Blog', () => {
 
       api.blog.getAllBlogs(api)
         .then(response => {
-          expect(response.statusCode).to.equal(200)
-          expect(response.body).to.be.a('object')
-          expect(response.body.objects).to.be.a('array')
+          expect(response.status).to.equal(200)
+          expect(response.data).to.be.a('object')
+          expect(response.data.objects).to.be.a('array')
           done()
         })
         .catch(error => done(error))
@@ -32,9 +32,9 @@ describe('Blog', () => {
 
       api.blog.getPosts()
         .then(response => {
-          expect(response.statusCode).to.equal(200)
-          expect(response.body).to.be.a('object')
-          expect(response.body.objects).to.be.a('array')
+          expect(response.status).to.equal(200)
+          expect(response.data).to.be.a('object')
+          expect(response.data.objects).to.be.a('array')
           done()
         })
         .catch(error => done(error))
@@ -44,9 +44,9 @@ describe('Blog', () => {
 
       api.blog.getPosts({content_group_id})
         .then(response => {
-          expect(response.statusCode).to.equal(200)
-          expect(response.body).to.be.a('object')
-          expect(response.body.objects).to.be.a('array')
+          expect(response.status).to.equal(200)
+          expect(response.data).to.be.a('object')
+          expect(response.data.objects).to.be.a('array')
           done()
         })
         .catch(error => done(error))
@@ -56,9 +56,9 @@ describe('Blog', () => {
 
       api.blog.getPostById(blogPostId)
         .then(response => {
-          expect(response.statusCode).to.equal(200)
-          expect(response.body).to.be.a('object')
-          expect(response.body.html_title).to.equal('Test Blog Post')
+          expect(response.status).to.equal(200)
+          expect(response.data).to.be.a('object')
+          expect(response.data.html_title).to.equal('Test Blog Post')
           done()
         })
         .catch(error => done(error))
