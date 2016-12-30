@@ -4,11 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _requestPromise = require('request-promise');
+var _axios = require('axios');
 
-var _requestPromise2 = _interopRequireDefault(_requestPromise);
+var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25,28 +27,23 @@ var Request = function () {
     if (apiKey === null) throw new Error('You must provide the API key.');
 
     this.apiKey = apiKey;
-    this.apiOptions = {
-      host: '' + API_ENDPOINT
-    };
+    this.apiInstance = _axios2.default.create({
+      baseURL: '' + API_ENDPOINT,
+      timeout: 10000
+    });
   }
 
   _createClass(Request, [{
-    key: 'normalizeEndPointURL',
-    value: function normalizeEndPointURL(endPoint) {
-      return API_ENDPOINT + '/' + endPoint + '?hapikey=' + this.apiKey;
+    key: 'normalizeParams',
+    value: function normalizeParams(params) {
+      return _extends({ hapikey: this.apiKey }, params);
     }
   }, {
     key: 'get',
     value: function get(endPoint) {
       var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-
-      return (0, _requestPromise2.default)({
-        uri: this.normalizeEndPointURL(endPoint),
-        qs: params,
-        json: true,
-        resolveWithFullResponse: true
-      });
+      return this.apiInstance.get('' + endPoint, { params: this.normalizeParams(params) });
     }
 
     // TODO

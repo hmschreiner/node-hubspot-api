@@ -12,6 +12,10 @@ var _errorHandler = require('../helpers/errorHandler');
 
 var _errorHandler2 = _interopRequireDefault(_errorHandler);
 
+var _responseHandler = require('../helpers/responseHandler');
+
+var _responseHandler2 = _interopRequireDefault(_responseHandler);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37,7 +41,7 @@ var Contacts = function () {
       }, params);
 
       return this.api.get('contacts/v1/lists/all/contacts/all', defaultParams).then(function (response) {
-        return response;
+        return (0, _responseHandler2.default)(response);
       }).catch(function (error) {
         return (0, _errorHandler2.default)(error);
       });
