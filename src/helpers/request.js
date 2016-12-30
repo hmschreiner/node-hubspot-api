@@ -1,4 +1,4 @@
-import rp from 'request-promise'
+import axios from 'axios'
 
 const API_ENDPOINT = 'https://api.hubapi.com'
 
@@ -9,23 +9,18 @@ class Request {
     if (apiKey === null) throw new Error('You must provide the API key.')
 
     this.apiKey = apiKey
-    this.apiOptions = {
-      host: `${API_ENDPOINT}`,
-    };
+    this.apiInstance = axios.create({
+      baseURL: `${API_ENDPOINT}`,
+      timeout: 10000,
+    })
   }
 
-  normalizeEndPointURL(endPoint) {
-      return `${API_ENDPOINT}/${endPoint}?hapikey=${this.apiKey}`
+  normalizeParams(params) {
+    return { hapikey: this.apiKey, ...params }
   }
 
   get(endPoint, params = {}) {
-
-    return rp({
-      uri: this.normalizeEndPointURL(endPoint),
-      qs: params,
-      json: true,
-      resolveWithFullResponse: true,
-    })
+    return this.apiInstance.get(`${endPoint}`, {params: this.normalizeParams(params)})
   }
 
   // TODO
