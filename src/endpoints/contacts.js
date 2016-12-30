@@ -1,4 +1,5 @@
 import errorHandler from '../helpers/errorHandler'
+import responseHandler from '../helpers/responseHandler'
 
 class Contacts {
 
@@ -18,7 +19,7 @@ class Contacts {
     }
 
     return this.api.get('contacts/v1/lists/all/contacts/all', defaultParams)
-      .then(response => response)
+      .then(response => responseHandler(response))
       .catch(error => errorHandler(error))
   }
 }
