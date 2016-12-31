@@ -117,7 +117,7 @@ api.blogs.getPosts({
 
 **Reference:** http://developers.hubspot.com/docs/methods/blogv2/get_blog_posts
 
-#### Get the blog post by ID
+#### - Get the blog post by ID
 Get a specific blog post by ID.
 
 **Usage:**
