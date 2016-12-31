@@ -44,30 +44,10 @@ var Blog = function () {
       });
     }
   }, {
-    key: 'getPostBySlug',
-    value: function getPostBySlug(slug) {
-
-      return this.api.get('content/api/v2/blog-posts', { slug: slug }).then(function (response) {
-        return response;
-      }).catch(function (error) {
-        return (0, _errorHandler2.default)(error);
-      });
-    }
-  }, {
     key: 'getPostById',
     value: function getPostById(postId) {
 
       return this.api.get('content/api/v2/blog-posts/' + postId).then(function (response) {
-        return response;
-      }).catch(function (error) {
-        return (0, _errorHandler2.default)(error);
-      });
-    }
-  }, {
-    key: 'getAllTopics',
-    value: function getAllTopics(params) {
-
-      return this.api.get('content/api/v2/blog-posts', _extends({}, params)).then(function (response) {
         return response;
       }).catch(function (error) {
         return (0, _errorHandler2.default)(error);
