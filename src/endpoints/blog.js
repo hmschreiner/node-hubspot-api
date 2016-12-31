@@ -23,23 +23,9 @@ class Blog {
       .catch(error => errorHandler(error))
   }
 
-  getPostBySlug(slug) {
-
-    return this.api.get('content/api/v2/blog-posts', { slug })
-      .then(response => response)
-      .catch(error => errorHandler(error))
-  }
-
   getPostById(postId) {
 
     return this.api.get(`content/api/v2/blog-posts/${postId}`)
-      .then(response => response)
-      .catch(error => errorHandler(error))
-  }
-
-  getAllTopics(params) {
-
-    return this.api.get('content/api/v2/blog-posts', { ...params })
       .then(response => response)
       .catch(error => errorHandler(error))
   }
