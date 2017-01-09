@@ -64,7 +64,7 @@ Parameter | Description | Required | Default
 
 **Usage:**
 ```javascript
-api.blogs.getAllBlogs({
+api.blog.getAllBlogs({
   limit: 20,
   offset: 0,
   created: null,
@@ -98,7 +98,7 @@ Parameter | Description | Required | Default
 
 **Usage:**
 ```javascript
-api.blogs.getPosts({
+api.blog.getPosts({
   limit: 20,
   offset: 0,
   archived: false,
@@ -123,7 +123,7 @@ Get a specific blog post by ID.
 
 **Usage:**
 ```javascript
-api.blogs.getPostById(3198892953)
+api.blog.getPostById(3198892953)
 .then(response => console.log(response.data))
 .catch(error => console.error(error))
 ```
