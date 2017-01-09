@@ -5,8 +5,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "test": "mocha test --timeout 15000 --compilers js:babel-core/register",
-    "build": "babel src --presets babel-preset-es2015 --out-dir dist",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
+    "build": "babel src --presets babel-preset-es2015 --out-dir dist"
   },
   "repository": {
     "type": "git",
