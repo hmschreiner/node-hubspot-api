@@ -3,4 +3,8 @@
  */
 module.exports = {
   apiKey: 'demo',
+  credentials: {
+    username: 'testapi@hubspot.com',
+    password: 'HubSpot',
+  }
 }

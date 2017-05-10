@@ -22,6 +22,18 @@ class Contacts {
       .then(response => responseHandler(response))
       .catch(error => errorHandler(error))
   }
+
+  createContact(properties) {
+
+    let mappedProperties = Object.keys(properties).map((property) => ({
+	     property: property,
+       value: properties[property],
+    }))
+
+    return this.api.post('contacts/v1/contact', {properties: [ ...mappedProperties ]})
+      .then(response => responseHandler(response))
+      .catch(error => errorHandler(error))
+  }
 }
 
 export default Contacts
