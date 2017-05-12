@@ -48,6 +48,27 @@ api.contacts.getAll({
 
 **Reference:** http://developers.hubspot.com/docs/methods/contacts/get_contacts
 
+#### - Create a new contact
+Create a new contact in HubSpot. Returns a 200 response on success. The response will include the details for the created contact.
+
+If there is an existing contact with the email address included in the request, the response body will include the identityProfile details of the contact, which will include the vid of the existing record.
+
+**Usage:**
+```javascript
+api.contacts.createContact({
+  email: 'email@domain.com',
+  firstname: 'James',
+  lastname: 'Bond',
+  website: 'http://www.mycompany.com',
+  company: 'My Company',
+  ...
+})
+.then(response => console.log(response.data.properties))
+.catch(error => console.error(error))
+```
+
+**Reference:**
+https://developers.hubspot.com/docs/methods/contacts/create_contact
 
 ### Blog
 
