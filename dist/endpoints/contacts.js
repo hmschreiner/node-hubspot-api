@@ -18,6 +18,8 @@ var _responseHandler2 = _interopRequireDefault(_responseHandler);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Contacts = function () {
@@ -41,6 +43,23 @@ var Contacts = function () {
       }, params);
 
       return this.api.get('contacts/v1/lists/all/contacts/all', defaultParams).then(function (response) {
+        return (0, _responseHandler2.default)(response);
+      }).catch(function (error) {
+        return (0, _errorHandler2.default)(error);
+      });
+    }
+  }, {
+    key: 'createContact',
+    value: function createContact(properties) {
+
+      var mappedProperties = Object.keys(properties).map(function (property) {
+        return {
+          property: property,
+          value: properties[property]
+        };
+      });
+
+      return this.api.post('contacts/v1/contact', { properties: [].concat(_toConsumableArray(mappedProperties)) }).then(function (response) {
         return (0, _responseHandler2.default)(response);
       }).catch(function (error) {
         return (0, _errorHandler2.default)(error);

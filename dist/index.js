@@ -24,7 +24,7 @@ var NodeHubspotApi = function NodeHubspotApi() {
     calendar: null,
     companies: null,
     contacts: new _contacts2.default(api),
-    blog: new _blog2.default(api),
+    blog: (0, _blog2.default)(api),
     domains: null,
     files: null
   };

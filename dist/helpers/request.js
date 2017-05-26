@@ -50,7 +50,11 @@ var Request = function () {
 
   }, {
     key: 'post',
-    value: function post() {}
+    value: function post(endPoint) {
+      var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      return this.apiInstance.post(endPoint + '?hapikey=' + this.apiKey, this.normalizeParams(params));
+    }
 
     // TODO
 
