@@ -77,7 +77,7 @@ If the request succeeds, you'll get an HTTP 204 response, which represents that 
 
 **Usage:**
 ```javascript
-api.contacts.updateContact({
+api.contacts.updateContactById({
   email: 'new-email@domain.com',
   firstname: 'Jon',
   lastname: 'Doe',
