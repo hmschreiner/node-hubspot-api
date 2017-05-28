@@ -1,10 +1,7 @@
 import chai from 'chai'
-import NodeHubspotApi from '../src'
-import { apiKey } from './config'
+import api from './setup'
 
 let expect = chai.expect
-
-const api = new NodeHubspotApi(apiKey)
 
 describe('Contacts', () => {
 
@@ -23,7 +20,7 @@ describe('Contacts', () => {
     })
   })
 
-  describe('Create a contact', () => {
+  describe('Create or update a contact', () => {
 
     let newContact = {
       email: Math.random().toString(36).substring(2,11) + '@domain.com',
@@ -32,6 +29,8 @@ describe('Contacts', () => {
       website: 'http://www.mycompany.com',
       company: 'My Company',
     }
+
+    let existingContact = {}
 
     it('Should return the details of the new contact record', done => {
 
@@ -45,6 +44,26 @@ describe('Contacts', () => {
           expect(response.data.properties.lastname.value).to.be.equal(newContact.lastname)
           expect(response.data.properties.website.value).to.be.equal(newContact.website)
           expect(response.data.properties.company.value).to.be.equal(newContact.company)
+
+          // Save created contact ID
+          existingContact.id = response.data.vid
+
+          done()
+        })
+        .catch(error => done(error))
+    })
+
+    it('Should return the details of the updated contact record', done => {
+
+      existingContact = {
+        ...existingContact,
+        firstname: 'Jon',
+        lastname: 'Doe',
+      }
+
+      api.contacts.updateContact(existingContact, existingContact.id)
+        .then(response => {
+          expect(response.status).to.equal(204)
           done()
         })
         .catch(error => done(error))

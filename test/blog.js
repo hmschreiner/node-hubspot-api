@@ -1,10 +1,7 @@
 import chai from 'chai'
-import NodeHubspotApi from '../src'
-import { apiKey } from './config'
+import api from './setup'
 
 let expect = chai.expect
-
-const api = new NodeHubspotApi(apiKey)
 
 describe('Blog', () => {
 
