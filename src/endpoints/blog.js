@@ -1,33 +1,28 @@
 import errorHandler from '../helpers/errorHandler'
 
-class Blog {
+const Blog = (api = null) => {
 
-  constructor(api = null) {
+  if (api === null) throw new Error('Request instance must be provided on constructor.')
 
-    if (api === null) throw new Error('Request instance must be provided on constructor.')
+  return {
+    getAllBlogs(params) {
 
-    this.api = api
-  }
+      return api.get('content/api/v2/blogs', { ...params })
+        .then(response => response)
+        .catch(error => errorHandler(error))
+    },
+    getPosts(params) {
 
-  getAllBlogs(params) {
+      return api.get('content/api/v2/blog-posts', { ...params })
+        .then(response => response)
+        .catch(error => errorHandler(error))
+    },
+    getPostById(postId) {
 
-    return this.api.get('content/api/v2/blogs', { ...params })
-      .then(response => response)
-      .catch(error => errorHandler(error))
-  }
-
-  getPosts(params) {
-
-    return this.api.get('content/api/v2/blog-posts', { ...params })
-      .then(response => response)
-      .catch(error => errorHandler(error))
-  }
-
-  getPostById(postId) {
-
-    return this.api.get(`content/api/v2/blog-posts/${postId}`)
-      .then(response => response)
-      .catch(error => errorHandler(error))
+      return api.get(`content/api/v2/blog-posts/${postId}`)
+        .then(response => response)
+        .catch(error => errorHandler(error))
+    },
   }
 }
 
