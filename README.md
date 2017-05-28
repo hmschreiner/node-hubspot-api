@@ -108,7 +108,7 @@ api.contacts.updateContactByEmail({
 ```
 
 **Reference:**
-https://developers.hubspot.com/docs/methods/contacts/update_contact
+https://developers.hubspot.com/docs/methods/contacts/update_contact-by-email
 
 ### Blog
 
