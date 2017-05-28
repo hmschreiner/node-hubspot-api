@@ -57,11 +57,21 @@ var Contacts = function Contacts() {
         return (0, _errorHandler2.default)(error);
       });
     },
-    updateContact: function updateContact(properties, id) {
+    updateContactById: function updateContactById(properties, id) {
 
       var mappedProperties = this.mapProperties(properties);
 
       return api.post('contacts/v1/contact/vid/' + id + '/profile', { properties: [].concat(_toConsumableArray(mappedProperties)) }).then(function (response) {
+        return (0, _responseHandler2.default)(response);
+      }).catch(function (error) {
+        return (0, _errorHandler2.default)(error);
+      });
+    },
+    updateContactByEmail: function updateContactByEmail(properties, email) {
+
+      var mappedProperties = this.mapProperties(properties);
+
+      return api.post('contacts/v1/contact/email/' + email + '/profile', { properties: [].concat(_toConsumableArray(mappedProperties)) }).then(function (response) {
         return (0, _responseHandler2.default)(response);
       }).catch(function (error) {
         return (0, _errorHandler2.default)(error);

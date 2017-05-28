@@ -33,14 +33,22 @@ const Contacts = (api = null) => {
         .then(response => responseHandler(response))
         .catch(error => errorHandler(error))
     },
-    updateContact(properties, id) {
+    updateContactById(properties, id) {
 
       let mappedProperties = this.mapProperties(properties)
 
       return api.post(`contacts/v1/contact/vid/${id}/profile`, {properties: [ ...mappedProperties ]})
         .then(response => responseHandler(response))
         .catch(error => errorHandler(error))
-    }
+    },
+    updateContactByEmail(properties, email) {
+
+      let mappedProperties = this.mapProperties(properties)
+
+      return api.post(`contacts/v1/contact/email/${email}/profile`, {properties: [ ...mappedProperties ]})
+        .then(response => responseHandler(response))
+        .catch(error => errorHandler(error))
+    },
   }
 }
 

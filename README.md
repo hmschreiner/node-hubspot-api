@@ -85,7 +85,25 @@ api.contacts.updateContact({
   company: 'My Company 2',
   ...
 }, 123456)
-.then(response => console.log(response.data.properties))
+.then(response => console.log(response.status))
+.catch(error => console.error(error))
+```
+
+**Reference:**
+https://developers.hubspot.com/docs/methods/contacts/update_contact
+
+#### - Update a contact by email
+
+**Usage:**
+```javascript
+api.contacts.updateContactByEmail({
+  firstname: 'Jon',
+  lastname: 'Doe',
+  website: 'http://www.my-new-company.com',
+  company: 'My Company 2',
+  ...
+}, 'email@domain.com')
+.then(response => console.log(response.status))
 .catch(error => console.error(error))
 ```
 

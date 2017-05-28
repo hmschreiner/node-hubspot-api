@@ -22,7 +22,7 @@ describe('Contacts', () => {
 
   describe('Create or update a contact', () => {
 
-    let newContact = {
+    let contactInfo = {
       email: Math.random().toString(36).substring(2,11) + '@domain.com',
       firstname: 'James',
       lastname: 'Bond',
@@ -30,38 +30,52 @@ describe('Contacts', () => {
       company: 'My Company',
     }
 
-    let existingContact = {}
-
     it('Should return the details of the new contact record', done => {
 
-      api.contacts.createContact(newContact)
+      api.contacts.createContact(contactInfo)
         .then(response => {
           expect(response.status).to.equal(200)
           expect(response.data).to.be.a('object')
           expect(response.data.properties).to.be.a('object')
-          expect(response.data.properties.email.value).to.be.equal(newContact.email)
-          expect(response.data.properties.firstname.value).to.be.equal(newContact.firstname)
-          expect(response.data.properties.lastname.value).to.be.equal(newContact.lastname)
-          expect(response.data.properties.website.value).to.be.equal(newContact.website)
-          expect(response.data.properties.company.value).to.be.equal(newContact.company)
+          expect(response.data.properties.email.value).to.be.equal(contactInfo.email)
+          expect(response.data.properties.firstname.value).to.be.equal(contactInfo.firstname)
+          expect(response.data.properties.lastname.value).to.be.equal(contactInfo.lastname)
+          expect(response.data.properties.website.value).to.be.equal(contactInfo.website)
+          expect(response.data.properties.company.value).to.be.equal(contactInfo.company)
 
           // Save created contact ID
-          existingContact.id = response.data.vid
+          contactInfo.id = response.data.vid
 
           done()
         })
         .catch(error => done(error))
     })
 
-    it('Should return the details of the updated contact record', done => {
+    it('Should return the details of the updated contact record by ID', done => {
 
-      existingContact = {
-        ...existingContact,
+      contactInfo = {
+        ...contactInfo,
         firstname: 'Jon',
         lastname: 'Doe',
       }
 
-      api.contacts.updateContact(existingContact, existingContact.id)
+      api.contacts.updateContactById(contactInfo, contactInfo.id)
+        .then(response => {
+          expect(response.status).to.equal(204)
+          done()
+        })
+        .catch(error => done(error))
+    })
+
+    it('Should return the details of the updated contact record by email', done => {
+
+      contactInfo = {
+        ...contactInfo,
+        firstname: 'Jon Update',
+        lastname: 'Doe Update',
+      }
+
+      api.contacts.updateContactByEmail(contactInfo, contactInfo.email)
         .then(response => {
           expect(response.status).to.equal(204)
           done()
