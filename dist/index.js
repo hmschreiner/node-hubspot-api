@@ -14,7 +14,7 @@ var _blog2 = _interopRequireDefault(_blog);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var NodeHubspotApi = function NodeHubspotApi() {
+var NodeHubSpotApi = function NodeHubSpotApi() {
   var apiKey = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
 
@@ -23,11 +23,12 @@ var NodeHubspotApi = function NodeHubspotApi() {
   return {
     calendar: null,
     companies: null,
-    contacts: new _contacts2.default(api),
+    contacts: (0, _contacts2.default)(api),
     blog: (0, _blog2.default)(api),
     domains: null,
-    files: null
+    files: null,
+    deals: null
   };
 };
 
-module.exports = NodeHubspotApi;
+module.exports = NodeHubSpotApi;

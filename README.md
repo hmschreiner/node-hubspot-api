@@ -15,9 +15,9 @@ A wrapper for the HubSpot API based on Node - http://developers.hubspot.com/docs
 
 ## Get Started
 ```javascript
-import NodeHubspotApi from 'node-hubspot-api'
+import NodeHubSpotApi from 'node-hubspot-api'
 
-const api = new NodeHubspotApi('your_api_key')
+const api = new NodeHubSpotApi('your_api_key')
 ```
 
 ## Available Resources
@@ -69,6 +69,28 @@ api.contacts.createContact({
 
 **Reference:**
 https://developers.hubspot.com/docs/methods/contacts/create_contact
+
+#### - Update a contact by ID
+Update an existing contact in HubSpot. This method lets you update the properties of a contact in HubSpot. You must pass the Contact's ID that you're updating as second parameter.
+
+If the request succeeds, you'll get an HTTP 204 response, which represents that you have successfully updated the contact in the system. There will be no data in the response body.
+
+**Usage:**
+```javascript
+api.contacts.updateContact({
+  email: 'new-email@domain.com',
+  firstname: 'Jon',
+  lastname: 'Doe',
+  website: 'http://www.my-new-company.com',
+  company: 'My Company 2',
+  ...
+}, 123456)
+.then(response => console.log(response.data.properties))
+.catch(error => console.error(error))
+```
+
+**Reference:**
+https://developers.hubspot.com/docs/methods/contacts/update_contact
 
 ### Blog
 
