@@ -76,6 +76,16 @@ var Contacts = function Contacts() {
       }).catch(function (error) {
         return (0, _errorHandler2.default)(error);
       });
+    },
+    createOrUpdateContact: function createOrUpdateContact(properties, email) {
+
+      var mappedProperties = this.mapProperties(properties);
+
+      return api.post('contacts/v1/contact/createOrUpdate/email/' + email, { properties: [].concat(_toConsumableArray(mappedProperties)) }).then(function (response) {
+        return (0, _responseHandler2.default)(response);
+      }).catch(function (error) {
+        return (0, _errorHandler2.default)(error);
+      });
     }
   };
 };

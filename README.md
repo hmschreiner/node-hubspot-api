@@ -1,7 +1,6 @@
 # node-hubspot-api
 ![version](http://img.shields.io/npm/v/node-hubspot-api.svg)
 [![Build Status](https://api.travis-ci.org/hmschreiner/node-hubspot-api.svg)](https://travis-ci.org/hmschreiner/node-hubspot-api.svg?branch=master)
-[![Coverage Status](https://coveralls.io/repos/github/hmschreiner/node-hubspot-api/badge.svg?branch=master)](https://coveralls.io/github/hmschreiner/node-hubspot-api?branch=master)
 
 A wrapper for the HubSpot API based on Node - http://developers.hubspot.com/docs/overview
 
@@ -93,6 +92,9 @@ api.contacts.updateContactById({
 https://developers.hubspot.com/docs/methods/contacts/update_contact
 
 #### - Update a contact by email
+Update an existing contact in HubSpot, identified by email. This method lets you update the properties of a contact in HubSpot. You must pass the Contact's email that you're updating as second parameter.
+
+If the request succeeds, you'll get an HTTP 204 response, which represents that you have successfully updated the contact in the system. There will be no data in the response body.
 
 **Usage:**
 ```javascript
@@ -109,6 +111,29 @@ api.contacts.updateContactByEmail({
 
 **Reference:**
 https://developers.hubspot.com/docs/methods/contacts/update_contact-by-email
+
+#### - Create or update a contact
+Create a contact if it doesn't exist already, or update it with the latest property values if it does.
+
+This returns a 200 response on success. The response will contain a vid of the updated or created record, and an isNew field that indicates if a new record was created. If the field is false, an existing record was updated.
+
+This will return a 409 Conflict error response if you are trying to update the email address of a record, and there is an existing record with the new email address.
+
+**Usage:**
+```javascript
+api.contacts.createOrUpdateContact({
+  firstname: 'Jon',
+  lastname: 'Doe',
+  website: 'http://www.my-new-company.com',
+  company: 'My Company 2',
+  ...
+}, 'email@domain.com')
+.then(response => console.log(response.status))
+.catch(error => console.error(error))
+```
+
+**Reference:**
+https://developers.hubspot.com/docs/methods/contacts/create_or_update
 
 ### Blog
 

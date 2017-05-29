@@ -49,6 +49,15 @@ const Contacts = (api = null) => {
         .then(response => responseHandler(response))
         .catch(error => errorHandler(error))
     },
+    createOrUpdateContact(properties, email) {
+
+      let mappedProperties = this.mapProperties(properties)
+
+      return api.post(`contacts/v1/contact/createOrUpdate/email/${email}`, {properties: [ ...mappedProperties ]})
+        .then(response => responseHandler(response))
+        .catch(error => errorHandler(error))
+
+    },
   }
 }
 

@@ -30,7 +30,7 @@ describe('Contacts', () => {
       company: 'My Company',
     }
 
-    it('Should return the details of the new contact record', done => {
+    it('Should return new contact record', done => {
 
       api.contacts.createContact(contactInfo)
         .then(response => {
@@ -51,7 +51,7 @@ describe('Contacts', () => {
         .catch(error => done(error))
     })
 
-    it('Should return the details of the updated contact record by ID', done => {
+    it('Should return updated contact record by ID', done => {
 
       contactInfo = {
         ...contactInfo,
@@ -67,7 +67,7 @@ describe('Contacts', () => {
         .catch(error => done(error))
     })
 
-    it('Should return the details of the updated contact record by email', done => {
+    it('Should return updated contact record by email', done => {
 
       contactInfo = {
         ...contactInfo,
@@ -82,5 +82,19 @@ describe('Contacts', () => {
         })
         .catch(error => done(error))
     })
+
+    it('Should return the created or updated contact record by email and indicates if a new contact was created', done => {
+
+      api.contacts.createOrUpdateContact(contactInfo, contactInfo.email)
+        .then(response => {
+          expect(response.status).to.equal(200)
+          expect(response.data.vid).to.be.a('number')
+          expect(response.data.isNew).to.be.a('boolean')
+          done()
+        })
+        .catch(error => done(error))
+
+    })
+
   })
 })
