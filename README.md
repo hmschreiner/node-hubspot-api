@@ -4,6 +4,9 @@
 
 A wrapper for the HubSpot API based on Node - http://developers.hubspot.com/docs/overview
 
+## Version 1.0
+First stable release is now available [here](https://github.com/hmschreiner/node-hubspot-api/releases/tag/v1.0.0).
+
 ## Installation
 
   `npm install node-hubspot-api --save`
@@ -26,12 +29,12 @@ const api = new NodeHubSpotApi('your_api_key')
 #### - Get all contacts
 Return all contacts that have been created. A paginated list of contacts will be returned with a maximum of 100 contacts per page.
 
-Parameter | Description | Required | Default
---------- | ----------- | :------: | :-----:
-**count** | Specify the amount of contacts to return. | No | 20
-**vidOffset** | Used to page through the contacts. | No | -
-**property** | By default, only a few standard properties will be included in the response data. Include the 'property' parameter to get the specified property in the response. | No | -
-**showListMemberships** | Indicate whether current list memberships should be fetched for the contact. | No | false
+| Parameter | Description | Required | Default |
+| --------- | ----------- | :------: | :-----: |
+| **count** | Specify the amount of contacts to return. | No | 20 |
+| **vidOffset** | Used to page through the contacts. | No | - |
+| **property** | By default, only a few standard properties will be included in the response data. Include the 'property' parameter to get the specified property in the response. | No | - |
+| **showListMemberships** | Indicate whether current list memberships should be fetched for the contact. | No | false |
 
 **Usage:**
 ```javascript
@@ -140,13 +143,13 @@ https://developers.hubspot.com/docs/methods/contacts/create_or_update
 #### - Get all blogs
 List all of the blogs for a portal. Supports paging and filtering.
 
-Parameter | Description | Required | Default
---------- | ----------- | :------: | :-----:
-**limit** | The number of items to return. | No | 20
-**offset** | The offset set to start returning rows from. | No | 0
-**created** | exact, range, gt, gte, lt, lte - When the post was first created, in milliseconds since the epoch. | No | -
-**deleted_at** | exact, gt, gte - When the post was deleted, in milliseconds since the epoch. Zero if the blog post was never deleted. | No | -
-**name** | exact, in - The internal name of the blog | No | -
+| Parameter | Description | Required | Default |
+| --------- | ----------- | :------: | :-----: |
+| **limit** | The number of items to return. | No | 20 |
+| **offset** | The offset set to start returning rows from. | No | 0
+| **created** | exact, range, gt, gte, lt, lte - When the post was first created, in milliseconds since the epoch. | No | - |
+| **deleted_at** | exact, gt, gte - When the post was deleted, in milliseconds since the epoch. Zero if the blog post was never deleted. | No | - |
+| **name** | exact, in - The internal name of the blog | No | - |
 
 **Usage:**
 ```javascript
@@ -166,21 +169,21 @@ api.blog.getAllBlogs({
 #### - List blog posts
 Get the posts from your blogs.
 
-Parameter | Description | Required | Default
---------- | ----------- | :------: | :-----:
-**limit** | The number of items to return. | No | 20
-**offset** | The offset set to start returning rows from. | No | 0
-**archived** | Returns the posts that match the boolean lookup (e.g. archived=false returns all posts currently not archived). | No | false
-**blog_author_id** | Returns the posts that match a particular blog author ID value. | No | -
-**campaign** | Returns the posts that match the campaign guid. | No | -
-**content_group_id** | Returns the posts that match the blog guid. The blog guid can be found in the blog dashboard URL (e.g. https://app.hubspot.com/blog/:portal_id/dashboard/:blog_guid). | No | -
-**created** | Returns the posts that match a particular created time value. Supports exact, range, gt, gte, lt, lte lookups. | No | -
-**deleted_at** | Returns the posts that match a particular deleted time value. Supports exact, gt, gte, lt, lte lookups. | No | -
-**name** | Returns the posts that match the name value. Supports exact, contains, icontains, ne lookups. | No | -
-**slug** | Returns the posts that match a particular slug value. | No | -
-**updated** | Returns the posts that match a particular updated time. Supports exact, range, gt, gte, lt, lte lookups. | No | -
-**state** | DRAFT, PUBLISHED, or SCHEDULED. | No | PUBLISHED
-**order_by** | Return the posts ordered by a particular field value. Blog posts can currently only be sorted by publish_date. Use a negative value to sort in descending order (e.g. order_by=-publish_date). | No | publish_date
+| Parameter | Description | Required | Default |
+| --------- | ----------- | :------: | :-----: |
+| **limit** | The number of items to return. | No | 20 |
+| **offset** | The offset set to start returning rows from. | No | 0 |
+| **archived** | Returns the posts that match the boolean lookup (e.g. archived=false returns all posts currently not archived). | No | false |
+| **blog_author_id** | Returns the posts that match a particular blog author ID value. | No | - |
+| **campaign** | Returns the posts that match the campaign guid. | No | - |
+| **content_group_id** | Returns the posts that match the blog guid. The blog guid can be found in the blog dashboard URL (e.g. https://app.hubspot.com/blog/:portal_id/dashboard/:blog_guid). | No | - |
+| **created** | Returns the posts that match a particular created time value. Supports exact, range, gt, gte, lt, lte lookups. | No | - |
+| **deleted_at** | Returns the posts that match a particular deleted time value. Supports exact, gt, gte, lt, lte lookups. | No | - |
+| **name** | Returns the posts that match the name value. Supports exact, contains, icontains, ne lookups. | No | - |
+| **slug** | Returns the posts that match a particular slug value. | No | -
+| **updated** | Returns the posts that match a particular updated time. Supports exact, range, gt, gte, lt, lte lookups. | No | - |
+| **state** | DRAFT, PUBLISHED, or SCHEDULED. | No | PUBLISHED |
+| **order_by** | Return the posts ordered by a particular field value. Blog posts can currently only be sorted by publish_date. Use a negative value to sort in descending order (e.g. order_by=-publish_date). | No | publish_date |
 
 **Usage:**
 ```javascript
@@ -217,7 +220,47 @@ api.blog.getPostById(3198892953)
 **Reference:**
 http://developers.hubspot.com/docs/methods/blogv2/get_blog_posts_blog_post_id
 
-## Disclaimer
-This tool is under development and don't have a stable version yet.
+### Deals
 
-*DO NOT USE IT IN PRODUCTION!*
+#### - Create a deal
+This methods creates a deal on HubSpot. You can create associations between Deals and Contacts and Companies but it's not required.
+
+The **dealstage** property is required when creating a deal. If the **pipeline** property is not specified, the default pipeline is assumed. However, it is recommended to always specify the pipeline, especially on portals with multiple pipelines.
+
+Returns a 200 on success with the data for the newly created deal in the response.
+
+You must pass an object to the method with these parameters:
+
+| Parameter | Description |
+| --------- | ----------- |
+| Associated records | `"associations": {}` - A set of IDs for records that the new deal should be associated with. Deals can be associated with a single company (associatedCompanyIds) and any number of contacts (associatedVids). |
+| Deal properties | `"properties": []` - A list of property names, and the value you want to set for the property. |
+
+**Usage:**
+```javascript
+api.deals.createDeal({
+  associations: {
+    associatedCompanyIds: [
+      123456
+    ],
+    associatedVids: [
+      1234, 12345, 123456, ...
+    ],
+  },
+  properties: {
+    dealname: 'This is a brand new deal. Awesome!',
+    hubspot_owner_id: 123456,
+    amount: '50000',
+    dealtype: 'newbusiness',
+    dealstage: 'appointmentscheduled',
+  },
+})
+.then(response => console.log(response.data))
+.catch(error => console.error(error))
+```
+
+**Reference:**
+https://developers.hubspot.com/docs/methods/deals/create_deal
+
+## Disclaimer
+This tool is under development and don't have all HubSpot API endpoints implemented yet.
