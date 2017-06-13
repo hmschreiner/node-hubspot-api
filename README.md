@@ -222,6 +222,35 @@ http://developers.hubspot.com/docs/methods/blogv2/get_blog_posts_blog_post_id
 
 ### Deals
 
+#### - Get all deals
+Get all of the deals in a portal.  Returns a paginated set of deals.
+
+In addition to the list of deals, each request will also return two values, *offset* and *hasMore*. If *hasMore* is *true*, you'll need to make another request, using the offset to get the next page of deal records.
+
+| Parameter | Description |
+| --------- | ----------- |
+| **limit** | The number of records to return. Defaults to 100, has a maximum value of 250. |
+| **offset** | Used to page through the results. If there are more records in your portal than the limit= parameter, you will need to use the offset returned in the first request to get the next set of results. |
+| **properties** | Used to include specific deal properties in the results.  By default, the results will only include Deal ID and will not include the values for any properties for your Deals.  Including this parameter will include the data for the specified property in the results.  You can include this parameter multiple times to request multiple properties. Note: Deals that do not have a value set for a property will not include that property, even when you specify the property. A deal without a value for the dealname property would not show the dealname property in the results, even with &properties=dealname in the URL. |
+| **propertiesWithHistory** | Works similarly to properties=, but this parameter will include the history for the specified property, instead of just including the current value. Use this parameter when you need the full history of changes to a property's value. |
+| **includeAssociations** | If it's set to *true*, it will include the IDs of the associated contacts and companies in the results. This will also automatically include the *num_associated_contacts* property. |
+
+**Usage:**
+```javascript
+api.deals.getAllDeals({
+ limit: 100,
+ offset: null,
+ properties: 'hubspot_owner_id',
+ propertiesWithHistory: 'dealname',
+ includeAssociations: false,
+})
+.then(response => console.log(response.data.deals))
+.catch(error => console.error(error))
+```
+
+**Reference:**
+https://developers.hubspot.com/docs/methods/deals/get-all-deals
+
 #### - Create a deal
 This methods creates a deal on HubSpot. You can create associations between Deals and Contacts and Companies but it's not required.
 

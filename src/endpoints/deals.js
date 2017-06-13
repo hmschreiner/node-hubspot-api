@@ -6,9 +6,9 @@ const Deals = (api = null) => {
   if (api === null) throw new Error('Request instance must be provided on constructor.')
 
   return {
-    createDeal(parameters) {
+    createDeal(params) {
 
-      let { properties, associations } = parameters
+      let { properties, associations } = params
 
       let mappedProperties = Object.keys(properties).map(property => ({
          value: properties[property],
@@ -18,6 +18,12 @@ const Deals = (api = null) => {
       return api.post('deals/v1/deal', {properties: [ ...mappedProperties ], associations})
         .then(response => responseHandler(response))
         .catch(error => errorHandler(error))
+    },
+    getAllDeals(params = {}) {
+
+      return api.get('deals/v1/deal/paged', params)
+      .then(response => responseHandler(response))
+      .catch(error => errorHandler(error))
     },
   }
 }

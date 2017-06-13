@@ -23,9 +23,9 @@ var Deals = function Deals() {
   if (api === null) throw new Error('Request instance must be provided on constructor.');
 
   return {
-    createDeal: function createDeal(parameters) {
-      var properties = parameters.properties,
-          associations = parameters.associations;
+    createDeal: function createDeal(params) {
+      var properties = params.properties,
+          associations = params.associations;
 
 
       var mappedProperties = Object.keys(properties).map(function (property) {
@@ -36,6 +36,16 @@ var Deals = function Deals() {
       });
 
       return api.post('deals/v1/deal', { properties: [].concat(_toConsumableArray(mappedProperties)), associations: associations }).then(function (response) {
+        return (0, _responseHandler2.default)(response);
+      }).catch(function (error) {
+        return (0, _errorHandler2.default)(error);
+      });
+    },
+    getAllDeals: function getAllDeals() {
+      var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+
+      return api.get('deals/v1/deal/paged', params).then(function (response) {
         return (0, _responseHandler2.default)(response);
       }).catch(function (error) {
         return (0, _errorHandler2.default)(error);
