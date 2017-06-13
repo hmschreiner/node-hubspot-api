@@ -6,12 +6,12 @@ class Request {
 
   constructor(apiKey = null) {
 
-    if (apiKey === null) throw new Error('You must provide the API key.')
+    if (apiKey === null) throw new Error('You must provide the HubSpot API key.')
 
     this.apiKey = apiKey
     this.apiInstance = axios.create({
       baseURL: `${API_ENDPOINT}`,
-      timeout: 10000,
+      timeout: 300000, // 5 minutes
     })
   }
 
