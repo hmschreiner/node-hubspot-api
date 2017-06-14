@@ -4,16 +4,13 @@
 
 A wrapper for the HubSpot API based on Node - http://developers.hubspot.com/docs/overview
 
-## Version 1.0
-First stable release is now available [here](https://github.com/hmschreiner/node-hubspot-api/releases/tag/v1.0.0).
-
 ## Installation
 
   `npm install node-hubspot-api --save`
 
 ## Tests
 
-  `npm test`
+  `npm run test`
 
 ## Get Started
 ```javascript
@@ -49,6 +46,30 @@ api.contacts.getAll({
 ```
 
 **Reference:** http://developers.hubspot.com/docs/methods/contacts/get_contacts
+
+#### - Get a contact by ID
+Returns information about a single contact by its ID. The contact's unique ID is stored in a field called 'vid' which stands for 'visitor ID'.
+
+| Parameter | Description | Required | Default |
+| --------- | ----------- | :------: | :-----: |
+| **property** | By default, you will get all properties that the contact has values for. If you include the "property" parameter, then the returned data will only include the property or properties that you request. You can include this parameter multiple times to specify multiple properties. The lastmodifieddate and associatedcompanyid will always be included, even if not specified. Keep in mind that only properties that have a value will be included in the response, even if specified in the URL. | No | - |
+| **propertyMode** | One of “value_only” or “value_and_history” to specify if the current value for a property should be fetched, or the value and all the historical values for that property.  | No | value_and_history |
+| **formSubmissionMode** | One of “all”, “none”, “newest”, “oldest” to specify which form submissions should be fetched. | No | all |
+| **showListMemberships** | Indicate whether current list memberships should be fetched for the contact. | No | false |
+
+**Usage:**
+```javascript
+api.contacts.getContactById(123456, {
+  property: 'hubspot_owner_id',
+  propertyMode: 'value_and_history',
+  formSubmissionMode: 'all',
+  showListMemberships: false,
+})
+.then(response => console.log(response.data))
+.catch(error => console.error(error))
+```
+
+**Reference:** https://developers.hubspot.com/docs/methods/contacts/get_contact
 
 #### - Create a new contact
 Create a new contact in HubSpot. Returns a 200 response on success. The response will include the details for the created contact.

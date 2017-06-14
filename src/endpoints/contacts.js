@@ -8,7 +8,7 @@ const Contacts = (api = null) => {
   return {
     mapProperties(properties) {
 
-      return Object.keys(properties).map((property) => ({
+      return Object.keys(properties).map(property => ({
   	     property: property,
          value: properties[property],
       }))
@@ -25,9 +25,9 @@ const Contacts = (api = null) => {
         .then(response => responseHandler(response))
         .catch(error => errorHandler(error))
     },
-    getContactById(id) {
+    getContactById(id, parameters = {}) {
 
-      return api.get(`contacts/v1/contact/vid/${id}/profile`)
+      return api.get(`contacts/v1/contact/vid/${id}/profile`, parameters)
         .then(response => responseHandler(response))
         .catch(error => errorHandler(error))
     },

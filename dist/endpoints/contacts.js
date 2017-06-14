@@ -48,8 +48,10 @@ var Contacts = function Contacts() {
       });
     },
     getContactById: function getContactById(id) {
+      var parameters = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-      return api.get('contacts/v1/contact/vid/' + id + '/profile').then(function (response) {
+
+      return api.get('contacts/v1/contact/vid/' + id + '/profile', parameters).then(function (response) {
         return (0, _responseHandler2.default)(response);
       }).catch(function (error) {
         return (0, _errorHandler2.default)(error);
