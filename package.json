@@ -1,6 +1,6 @@
 {
   "name": "node-hubspot-api",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A wrapper for the HubSpot API based on Node.",
   "main": "./dist/index.js",
   "scripts": {
