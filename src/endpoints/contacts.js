@@ -25,6 +25,12 @@ const Contacts = (api = null) => {
         .then(response => responseHandler(response))
         .catch(error => errorHandler(error))
     },
+    getContactById(id) {
+
+      return api.get(`contacts/v1/contact/vid/${id}/profile`)
+        .then(response => responseHandler(response))
+        .catch(error => errorHandler(error))
+    },
     createContact(properties) {
 
       let mappedProperties = this.mapProperties(properties)

@@ -47,6 +47,14 @@ var Contacts = function Contacts() {
         return (0, _errorHandler2.default)(error);
       });
     },
+    getContactById: function getContactById(id) {
+
+      return api.get('contacts/v1/contact/vid/' + id + '/profile').then(function (response) {
+        return (0, _responseHandler2.default)(response);
+      }).catch(function (error) {
+        return (0, _errorHandler2.default)(error);
+      });
+    },
     createContact: function createContact(properties) {
 
       var mappedProperties = this.mapProperties(properties);

@@ -5,18 +5,45 @@ let expect = chai.expect
 
 describe('Contacts', () => {
 
-  describe('Get All contacts', () => {
+  describe('Gets contacts', () => {
 
-    it('Should return all contacts', done => {
+    it('Should return all contacts', () => {
 
-      api.contacts.getAll()
+      return api.contacts.getAll()
         .then(response => {
           expect(response.status).to.equal(200)
           expect(response.data).to.be.a('object')
           expect(response.data.contacts).to.be.a('array')
-          done()
         })
-        .catch(error => done(error))
+    })
+
+    // Get a existing contact for test
+    let testContact = null
+
+    before(() => {
+
+        api.contacts.getAll()
+          .then(response => response.data.contacts[0])
+          .then(contactData => {
+            testContact = contactData
+          })
+          .catch(error => {
+            throw new Error(error)
+          })
+    })
+
+    it('Should return a single contact, by ID', () => {
+
+      let { firstname, lastname } = testContact.properties
+
+      return api.contacts.getContactById(testContact.vid)
+        .then(response => {
+          expect(response.status).to.equal(200)
+          expect(response.data).to.be.a('object')
+          expect(response.data.vid).to.be.a('number')
+          expect(response.data.properties.firstname.value).to.be.equal(firstname.value)
+          expect(response.data.properties.lastname.value).to.be.equal(lastname.value)
+        })
     })
   })
 
@@ -30,9 +57,9 @@ describe('Contacts', () => {
       company: 'My Company',
     }
 
-    it('Should return new contact record', done => {
+    it('Should return new contact record', () => {
 
-      api.contacts.createContact(contactInfo)
+      return api.contacts.createContact(contactInfo)
         .then(response => {
           expect(response.status).to.equal(200)
           expect(response.data).to.be.a('object')
@@ -45,13 +72,10 @@ describe('Contacts', () => {
 
           // Save created contact ID
           contactInfo.id = response.data.vid
-
-          done()
         })
-        .catch(error => done(error))
     })
 
-    it('Should return updated contact record by ID', done => {
+    it('Should return updated contact record by ID', () => {
 
       contactInfo = {
         ...contactInfo,
@@ -59,15 +83,13 @@ describe('Contacts', () => {
         lastname: 'Doe',
       }
 
-      api.contacts.updateContactById(contactInfo, contactInfo.id)
+      return api.contacts.updateContactById(contactInfo, contactInfo.id)
         .then(response => {
           expect(response.status).to.equal(204)
-          done()
         })
-        .catch(error => done(error))
     })
 
-    it('Should return updated contact record by email', done => {
+    it('Should return updated contact record by email', () => {
 
       contactInfo = {
         ...contactInfo,
@@ -75,25 +97,20 @@ describe('Contacts', () => {
         lastname: 'Doe Update',
       }
 
-      api.contacts.updateContactByEmail(contactInfo, contactInfo.email)
+      return api.contacts.updateContactByEmail(contactInfo, contactInfo.email)
         .then(response => {
           expect(response.status).to.equal(204)
-          done()
         })
-        .catch(error => done(error))
     })
 
-    it('Should return the created or updated contact record by email and indicates if a new contact was created', done => {
+    it('Should return the created or updated contact record by email and indicates if a new contact was created', () => {
 
-      api.contacts.createOrUpdateContact(contactInfo, contactInfo.email)
+      return api.contacts.createOrUpdateContact(contactInfo, contactInfo.email)
         .then(response => {
           expect(response.status).to.equal(200)
           expect(response.data.vid).to.be.a('number')
           expect(response.data.isNew).to.be.a('boolean')
-          done()
         })
-        .catch(error => done(error))
-
     })
 
   })
