@@ -75,6 +75,25 @@ api.contacts.getContactById(123456, {
 
 **Reference:** https://developers.hubspot.com/docs/methods/contacts/get_contact
 
+#### - Get a contact by email address
+Returns information about a single contact by its email address.
+
+**Usage:**
+```javascript
+api.contacts.getContactByEmail('name@company.com', {
+  property: [
+    'firstname', 'lastname', 'email',
+  ],
+  propertyMode: 'value_and_history',
+  formSubmissionMode: 'all',
+  showListMemberships: false,
+})
+.then(response => console.log(response.data))
+.catch(error => console.error(error))
+```
+
+**Reference:** https://developers.hubspot.com/docs/methods/contacts/get_contact_by_email
+
 #### - Create a new contact
 Create a new contact in HubSpot. Returns a 200 response on success. The response will include the details for the created contact.
 
