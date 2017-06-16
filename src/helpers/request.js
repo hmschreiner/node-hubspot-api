@@ -19,8 +19,34 @@ class Request {
     return { hapikey: this.apiKey, ...params }
   }
 
+  serializeProperties({ properties = {}, property = {} }) {
+
+    let objParam = Object.keys(properties).length === 0
+      ? property
+      : properties
+
+    let paramName = Object.keys(properties).length === 0
+      ? 'property'
+      : 'properties'
+
+    return Object.keys(objParam).map(key =>
+      `${paramName}=${encodeURIComponent(objParam[key])}`
+    ).join('&')
+  }
+
   get(endPoint, params = {}) {
-    return this.apiInstance.get(`${endPoint}`, {params: this.normalizeParams(params)})
+
+    let serializedProperties = this.serializeProperties(params)
+
+    if (params.hasOwnProperty('properties'))
+      delete params.properties
+
+    if (params.hasOwnProperty('property'))
+      delete params.property
+
+    return this.apiInstance.get(`${endPoint}?${serializedProperties}`, {
+      params: this.normalizeParams(params),
+    })
   }
 
   // TODO

@@ -38,11 +38,37 @@ var Request = function () {
       return _extends({ hapikey: this.apiKey }, params);
     }
   }, {
+    key: 'serializeProperties',
+    value: function serializeProperties(_ref) {
+      var _ref$properties = _ref.properties,
+          properties = _ref$properties === undefined ? {} : _ref$properties,
+          _ref$property = _ref.property,
+          property = _ref$property === undefined ? {} : _ref$property;
+
+
+      var objParam = Object.keys(properties).length === 0 ? property : properties;
+
+      var paramName = Object.keys(properties).length === 0 ? 'property' : 'properties';
+
+      return Object.keys(objParam).map(function (key) {
+        return paramName + '=' + encodeURIComponent(objParam[key]);
+      }).join('&');
+    }
+  }, {
     key: 'get',
     value: function get(endPoint) {
       var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-      return this.apiInstance.get('' + endPoint, { params: this.normalizeParams(params) });
+
+      var serializedProperties = this.serializeProperties(params);
+
+      if (params.hasOwnProperty('properties')) delete params.properties;
+
+      if (params.hasOwnProperty('property')) delete params.property;
+
+      return this.apiInstance.get(endPoint + '?' + serializedProperties, {
+        params: this.normalizeParams(params)
+      });
     }
 
     // TODO
