@@ -57,6 +57,16 @@ var Contacts = function Contacts() {
         return (0, _errorHandler2.default)(error);
       });
     },
+    getContactByEmail: function getContactByEmail(email) {
+      var parameters = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+
+      return api.get('contacts/v1/contact/email/' + email + '/profile', parameters).then(function (response) {
+        return (0, _responseHandler2.default)(response);
+      }).catch(function (error) {
+        return (0, _errorHandler2.default)(error);
+      });
+    },
     createContact: function createContact(properties) {
 
       var mappedProperties = this.mapProperties(properties);

@@ -22,7 +22,12 @@ describe('Contacts', () => {
 
     before(() => {
 
-        api.contacts.getAll()
+        api.contacts.getAll({
+          count: 1,
+          property: [
+            'email', 'firstname', 'lastname',
+          ],
+        })
           .then(response => response.data.contacts[0])
           .then(contactData => {
             testContact = contactData
@@ -43,6 +48,21 @@ describe('Contacts', () => {
           expect(response.data.vid).to.be.a('number')
           expect(response.data.properties.firstname.value).to.be.equal(firstname.value)
           expect(response.data.properties.lastname.value).to.be.equal(lastname.value)
+        })
+    })
+
+    it('Should return a single contact, by email address', () => {
+
+      let { firstname, lastname, email } = testContact.properties
+
+      return api.contacts.getContactByEmail(email.value)
+        .then(response => {
+          expect(response.status).to.equal(200)
+          expect(response.data).to.be.a('object')
+          expect(response.data.vid).to.be.a('number')
+          expect(response.data.properties.firstname.value).to.be.equal(firstname.value)
+          expect(response.data.properties.lastname.value).to.be.equal(lastname.value)
+          expect(response.data.properties.email.value).to.be.equal(email.value)
         })
     })
   })
