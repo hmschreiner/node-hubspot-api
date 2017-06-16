@@ -38,7 +38,9 @@ Return all contacts that have been created. A paginated list of contacts will be
 api.contacts.getAll({
   count: 20,
   vidOffset: null,
-  property: null,
+  property: [
+    'fistname', 'lastname', 'email',
+  ],
   showListMemberships: false,
 })
 .then(response => console.log(response.data.contacts))
@@ -60,7 +62,9 @@ Returns information about a single contact by its ID. The contact's unique ID is
 **Usage:**
 ```javascript
 api.contacts.getContactById(123456, {
-  property: 'hubspot_owner_id',
+  property: [
+    'firstname', 'lastname', 'email',
+  ],
   propertyMode: 'value_and_history',
   formSubmissionMode: 'all',
   showListMemberships: false,
@@ -261,7 +265,9 @@ In addition to the list of deals, each request will also return two values, *off
 api.deals.getAllDeals({
  limit: 100,
  offset: null,
- properties: 'hubspot_owner_id',
+ properties: [
+   'hubspot_owner_id',
+ ],
  propertiesWithHistory: 'dealname',
  includeAssociations: false,
 })
