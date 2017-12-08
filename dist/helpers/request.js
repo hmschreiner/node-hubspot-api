@@ -29,7 +29,7 @@ var Request = function () {
     this.apiKey = apiKey;
     this.apiInstance = _axios2.default.create({
       baseURL: '' + API_ENDPOINT,
-      timeout: 300000 });
+      timeout: 600000 });
   }
 
   _createClass(Request, [{

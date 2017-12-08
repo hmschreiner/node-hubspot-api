@@ -11,7 +11,7 @@ class Request {
     this.apiKey = apiKey
     this.apiInstance = axios.create({
       baseURL: `${API_ENDPOINT}`,
-      timeout: 300000, // 5 minutes
+      timeout: 600000, // 10 minutes
     })
   }
 
