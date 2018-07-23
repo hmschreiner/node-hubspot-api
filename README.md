@@ -303,6 +303,7 @@ Get all of the deals associated to a contact in a portal.  Returns a paginated s
 In addition to the list of deals, each request will also return two values, *offset* and *hasMore*. If *hasMore* is *true*, you'll need to make another request, using the offset to get the next page of deal records.
 
 Returns deals associated with a single contact by its ID. The contact's unique ID is stored in a field called 'vid' which stands for 'visitor ID'.
+
 | Parameter | Description |
 | --------- | ----------- |
 | **limit** | The number of records to return. Defaults to 100, has a maximum value of 250. |
