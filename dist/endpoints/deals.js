@@ -50,6 +50,14 @@ var Deals = function Deals() {
       }).catch(function (error) {
         return (0, _errorHandler2.default)(error);
       });
+    },
+    getAssociatedDeals: function getAssociatedDeals(id, params) {
+
+      return api.get('deals/v1/deal/associated/contact/' + id + '/paged', params).then(function (response) {
+        return (0, _responseHandler2.default)(response);
+      }).catch(function (error) {
+        return (0, _errorHandler2.default)(error);
+      });
     }
   };
 };
