@@ -49,7 +49,53 @@ describe('Deals', () => {
     })
 
   })
+  describe('Get associated deals', () => {
+    // Get a existing contact for test
+    let testContact = null
 
+    before(() => {
+
+        api.contacts.getAll({
+          count: 1,
+          property: [
+            'email', 'firstname', 'lastname',
+          ],
+        })
+          .then(response => response.data.contacts[0])
+          .then(contactData => {
+            testContact = contactData
+          })
+          .catch(error => {
+            throw new Error(error)
+          })
+    })
+    
+    it('Should return a list of all deals assocated with this vid', done => {
+
+      api.deals.getAssociatedDeals(testContact.vid)
+        .then(response => {
+          expect(response.status).to.equal(200)
+          expect(response.data).to.be.a('object')
+          expect(response.data.deals).to.be.a('array')
+          done()
+        })
+        .catch(error => done(error))
+    })
+
+    it('Should return a list of associated deals, limit by 1', done => {
+
+      api.deals.getAssociatedDeals(testContact.vid,{limit: 1})
+        .then(response => {
+          expect(response.status).to.equal(200)
+          expect(response.data).to.be.a('object')
+          expect(response.data.deals.length).to.be.equal(1)
+          expect(response.data.deals).to.be.a('array')
+          done()
+        })
+        .catch(error => done(error))
+    })
+
+  })
   describe('Create a deal', () => {
 
     it('Should return the data for the newly created deal', done => {

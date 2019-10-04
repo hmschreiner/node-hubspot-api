@@ -25,7 +25,14 @@ const Deals = (api = null) => {
       .then(response => responseHandler(response))
       .catch(error => errorHandler(error))
     },
+    getAssociatedDeals(id, params) {
+
+      return api.get(`deals/v1/deal/associated/contact/${id}/paged`, params)
+      .then(response => responseHandler(response))
+      .catch(error => errorHandler(error))
+    },
   }
+
 }
 
 export default Deals
