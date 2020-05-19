@@ -1,6 +1,5 @@
 # node-hubspot-api
-![version](http://img.shields.io/npm/v/node-hubspot-api.svg)
-[![Build Status](https://api.travis-ci.org/hmschreiner/node-hubspot-api.svg)](https://travis-ci.org/hmschreiner/node-hubspot-api.svg?branch=master)
+![Node.js CI](https://github.com/hmschreiner/node-hubspot-api/workflows/Node.js%20CI/badge.svg)
 
 A wrapper for the HubSpot API based on Node - http://developers.hubspot.com/docs/overview
 
